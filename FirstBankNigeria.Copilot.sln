@@ -1,0 +1,79 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Domain", "FirstBankNigeria.Copilot.Domain\FirstBankNigeria.Copilot.Domain.csproj", "{8C7D4EE5-3ABE-4F0D-940E-831489B00E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Application", "FirstBankNigeria.Copilot.Application\FirstBankNigeria.Copilot.Application.csproj", "{ECBAF139-8188-44C6-8333-BE8B5FFF026A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Infrastructure", "FirstBankNigeria.Copilot.Infrastructure\FirstBankNigeria.Copilot.Infrastructure.csproj", "{FB28ADED-5965-45F5-BB03-EE90FD8B3AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Api", "FirstBankNigeria.Copilot.Api\FirstBankNigeria.Copilot.Api.csproj", "{AC25A930-51CB-4686-9B7A-E41B1F082AE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{755328E5-135D-4B59-8EB1-0D6D899CDFD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Domain.Tests", "tests\FirstBankNigeria.Copilot.Domain.Tests\FirstBankNigeria.Copilot.Domain.Tests.csproj", "{3DF3FD6D-3C80-4D79-891B-78875FA788A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Application.Tests", "tests\FirstBankNigeria.Copilot.Application.Tests\FirstBankNigeria.Copilot.Application.Tests.csproj", "{1FB269D3-9C62-4D9E-BC47-9BF214D26721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Infrastructure.Tests", "tests\FirstBankNigeria.Copilot.Infrastructure.Tests\FirstBankNigeria.Copilot.Infrastructure.Tests.csproj", "{835D14D8-99DD-4F97-AA20-42071CECF070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Api.Tests", "tests\FirstBankNigeria.Copilot.Api.Tests\FirstBankNigeria.Copilot.Api.Tests.csproj", "{1D4C6CE1-9E6F-4AF3-A070-724908BCB480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstBankNigeria.Copilot.Architecture.Tests", "tests\FirstBankNigeria.Copilot.Architecture.Tests\FirstBankNigeria.Copilot.Architecture.Tests.csproj", "{75679338-6F8C-4759-BF26-55640CE4432E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C7D4EE5-3ABE-4F0D-940E-831489B00E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7D4EE5-3ABE-4F0D-940E-831489B00E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7D4EE5-3ABE-4F0D-940E-831489B00E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7D4EE5-3ABE-4F0D-940E-831489B00E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECBAF139-8188-44C6-8333-BE8B5FFF026A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECBAF139-8188-44C6-8333-BE8B5FFF026A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECBAF139-8188-44C6-8333-BE8B5FFF026A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECBAF139-8188-44C6-8333-BE8B5FFF026A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB28ADED-5965-45F5-BB03-EE90FD8B3AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB28ADED-5965-45F5-BB03-EE90FD8B3AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB28ADED-5965-45F5-BB03-EE90FD8B3AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB28ADED-5965-45F5-BB03-EE90FD8B3AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC25A930-51CB-4686-9B7A-E41B1F082AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC25A930-51CB-4686-9B7A-E41B1F082AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC25A930-51CB-4686-9B7A-E41B1F082AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC25A930-51CB-4686-9B7A-E41B1F082AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF3FD6D-3C80-4D79-891B-78875FA788A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF3FD6D-3C80-4D79-891B-78875FA788A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF3FD6D-3C80-4D79-891B-78875FA788A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF3FD6D-3C80-4D79-891B-78875FA788A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB269D3-9C62-4D9E-BC47-9BF214D26721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB269D3-9C62-4D9E-BC47-9BF214D26721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB269D3-9C62-4D9E-BC47-9BF214D26721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB269D3-9C62-4D9E-BC47-9BF214D26721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835D14D8-99DD-4F97-AA20-42071CECF070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835D14D8-99DD-4F97-AA20-42071CECF070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835D14D8-99DD-4F97-AA20-42071CECF070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835D14D8-99DD-4F97-AA20-42071CECF070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D4C6CE1-9E6F-4AF3-A070-724908BCB480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D4C6CE1-9E6F-4AF3-A070-724908BCB480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D4C6CE1-9E6F-4AF3-A070-724908BCB480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D4C6CE1-9E6F-4AF3-A070-724908BCB480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75679338-6F8C-4759-BF26-55640CE4432E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75679338-6F8C-4759-BF26-55640CE4432E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75679338-6F8C-4759-BF26-55640CE4432E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75679338-6F8C-4759-BF26-55640CE4432E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DF3FD6D-3C80-4D79-891B-78875FA788A8} = {755328E5-135D-4B59-8EB1-0D6D899CDFD7}
+		{1FB269D3-9C62-4D9E-BC47-9BF214D26721} = {755328E5-135D-4B59-8EB1-0D6D899CDFD7}
+		{835D14D8-99DD-4F97-AA20-42071CECF070} = {755328E5-135D-4B59-8EB1-0D6D899CDFD7}
+		{1D4C6CE1-9E6F-4AF3-A070-724908BCB480} = {755328E5-135D-4B59-8EB1-0D6D899CDFD7}
+		{75679338-6F8C-4759-BF26-55640CE4432E} = {755328E5-135D-4B59-8EB1-0D6D899CDFD7}
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
