@@ -28,9 +28,10 @@ standards for HealthCheck endpoints.
 - `FirstBankNigeria.Copilot.Domain/AssemblyMarker.cs` — Created (assembly reference marker for architecture tests)
 
 ### Application Layer
-- `FirstBankNigeria.Copilot.Application/DependencyInjection.cs` — Created
+- `FirstBankNigeria.Copilot.Application/DependencyInjection.cs` — Created (binds `HealthSettings` from `IConfiguration`)
+- `FirstBankNigeria.Copilot.Application/Common/Settings/HealthSettings.cs` — Created (typed options with `ServiceName`)
 - `FirstBankNigeria.Copilot.Application/Features/Health/Queries/GetHealth/GetHealthQuery.cs` — Created
-- `FirstBankNigeria.Copilot.Application/Features/Health/Queries/GetHealth/GetHealthQueryHandler.cs` — Created
+- `FirstBankNigeria.Copilot.Application/Features/Health/Queries/GetHealth/GetHealthQueryHandler.cs` — Created (reads `ServiceName` from `IOptions<HealthSettings>`)
 - `FirstBankNigeria.Copilot.Application/Features/Health/Queries/GetHealth/GetHealthResponse.cs` — Created
 
 ### Infrastructure Layer
@@ -67,7 +68,9 @@ None — the HealthCheck endpoint does not access the database.
 | `Serilog.AspNetCore 8.0.3` | Added | Structured logging (API + Infrastructure) |
 | `Serilog.Enrichers.Thread 4.0.0` | Added | Thread ID enrichment |
 | `Serilog.Enrichers.Environment 3.0.0` | Added | Machine name enrichment |
-| `Microsoft.Extensions.Caching.Memory 8.0.1` | Added | Mandatory Infrastructure-layer package |
+| `Microsoft.Extensions.Configuration.Abstractions 8.0.0` | Added | `IConfiguration` support in Application layer for settings binding |
+| `Microsoft.Extensions.Options 8.0.2` | Added | `IOptions<T>` pattern for typed settings in Application layer |
+| `Microsoft.Extensions.Options.ConfigurationExtensions 8.0.0` | Added | `services.Configure<T>(section)` extension method |
 | `Swashbuckle.AspNetCore 6.9.0` | Added | Swagger UI for API layer |
 | `Microsoft.AspNetCore.Authentication.JwtBearer 8.0.15` | Added | JWT Bearer authentication |
 
@@ -75,7 +78,7 @@ None — the HealthCheck endpoint does not access the database.
 
 ## Configuration Changes
 
-- `appsettings.json` — Added `Jwt:Authority`, `Jwt:Audience` keys (values populated at deployment); Serilog configuration with console sink
+- `appsettings.json` — Added `Jwt:Authority`, `Jwt:Audience` keys; `Health:ServiceName` key (set the name of the service here for every deployment); Serilog configuration with console sink
 - `appsettings.Development.json` — Added Debug-level logging override
 - `Properties/launchSettings.json` — Added `http` and `https` profiles; both set `launchUrl = "swagger"`
 

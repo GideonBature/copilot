@@ -1,5 +1,7 @@
+using FirstBankNigeria.Copilot.Application.Common.Settings;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace FirstBankNigeria.Copilot.Application.Features.Health.Queries.GetHealth;
 
@@ -9,10 +11,14 @@ namespace FirstBankNigeria.Copilot.Application.Features.Health.Queries.GetHealth
 public sealed class GetHealthQueryHandler : IRequestHandler<GetHealthQuery, GetHealthResponse>
 {
     private readonly ILogger<GetHealthQueryHandler> _logger;
+    private readonly HealthSettings _healthSettings;
 
-    public GetHealthQueryHandler(ILogger<GetHealthQueryHandler> logger)
+    public GetHealthQueryHandler(
+        ILogger<GetHealthQueryHandler> logger,
+        IOptions<HealthSettings> healthSettings)
     {
         _logger = logger;
+        _healthSettings = healthSettings.Value;
     }
 
     public Task<GetHealthResponse> Handle(GetHealthQuery request, CancellationToken cancellationToken)
@@ -22,7 +28,7 @@ public sealed class GetHealthQueryHandler : IRequestHandler<GetHealthQuery, GetH
         var response = new GetHealthResponse
         {
             Status = "Healthy",
-            Service = "Copilot API"
+            Service = _healthSettings.ServiceName
         };
 
         return Task.FromResult(response);

@@ -11,7 +11,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .Enrich.WithThreadId()
     .Enrich.WithMachineName());
 
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

@@ -1,6 +1,8 @@
+using FirstBankNigeria.Copilot.Application.Common.Settings;
 using FirstBankNigeria.Copilot.Application.Features.Health.Queries.GetHealth;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
@@ -9,12 +11,14 @@ namespace FirstBankNigeria.Copilot.Application.Tests.Features.Health.Queries;
 public sealed class GetHealthQueryHandlerTests
 {
     private readonly Mock<ILogger<GetHealthQueryHandler>> _loggerMock;
+    private readonly IOptions<HealthSettings> _healthOptions;
     private readonly GetHealthQueryHandler _handler;
 
     public GetHealthQueryHandlerTests()
     {
         _loggerMock = new Mock<ILogger<GetHealthQueryHandler>>();
-        _handler = new GetHealthQueryHandler(_loggerMock.Object);
+        _healthOptions = Options.Create(new HealthSettings { ServiceName = "Test Service" });
+        _handler = new GetHealthQueryHandler(_loggerMock.Object, _healthOptions);
     }
 
     [Fact]
@@ -32,7 +36,7 @@ public sealed class GetHealthQueryHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ValidQuery_ReturnsCorrectServiceName()
+    public async Task Handle_ValidQuery_ReturnsConfiguredServiceName()
     {
         // Arrange
         var query = new GetHealthQuery();
@@ -42,7 +46,7 @@ public sealed class GetHealthQueryHandlerTests
 
         // Assert
         result.Should().NotBeNull();
-        result.Service.Should().Be("Copilot API");
+        result.Service.Should().Be("Test Service");
     }
 
     [Fact]
