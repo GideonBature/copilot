@@ -22,7 +22,7 @@ builder.Services
     {
         options.Authority = builder.Configuration["Jwt:Authority"];
         options.Audience = builder.Configuration["Jwt:Audience"];
-        options.RequireHttpsMetadata = false;
+        options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
     });
 
 builder.Services.AddAuthorization();
@@ -45,4 +45,5 @@ app.MapControllers();
 
 app.Run();
 
+// Partial class declaration required to expose Program to WebApplicationFactory<Program> in integration tests.
 public partial class Program { }
