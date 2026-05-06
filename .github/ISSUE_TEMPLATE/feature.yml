@@ -1,0 +1,102 @@
+name: Feature request
+description: New feature or enhancement. Fill every field — the Copilot agent reads this literally.
+labels: ["feature", "needs-spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Before adding the `copilot-ready` label**, ensure every field below is filled
+        > completely. The Copilot coding agent reads this issue as its full brief. Vague
+        > acceptance criteria produce vague code.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One sentence — what does this feature do?
+      placeholder: "Add GET /v1/customers/{id} endpoint to retrieve a customer by ID"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Business context
+      description: Why is this needed? What problem does it solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: |
+        List every condition that must be true for this feature to be considered done.
+        Be specific about endpoints, stored procedures, response shapes, and error cases.
+      placeholder: |
+        - [ ] GET /v1/customers/{id} returns 200 with customer object on success
+        - [ ] Returns 404 when customer does not exist
+        - [ ] Returns 401 when request is not authenticated
+        - [ ] Oracle PKG_CUSTOMER.SP_GET_CUSTOMER is called via Dapper
+        - [ ] Only active customers (IS_ACTIVE = 1) are returned
+        - [ ] Audit trail entry is recorded on every retrieval
+        - [ ] Unit test covers handler happy path, not-found case, and inactive customer
+        - [ ] Integration test covers 200, 404, and 401 responses
+    validations:
+      required: true
+
+  - type: textarea
+    id: db_changes
+    attributes:
+      label: Database changes required
+      description: List any new tables, sequences, packages, or stored procedures needed.
+      placeholder: |
+        - New procedure SP_GET_CUSTOMER added to PKG_CUSTOMER
+        - New idempotent script: 005_add_sp_get_customer.sql
+        - (or "None")
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope — do NOT change these
+      description: Explicitly list what the agent must not touch.
+      placeholder: |
+        - Do not modify auth middleware
+        - Do not change existing customer create or update endpoints
+        - Do not add new NuGet packages
+    validations:
+      required: true
+
+  - type: dropdown
+    id: model
+    attributes:
+      label: Suggested model
+      description: |
+        Sonnet for routine CRUD, standard features, bug fixes, test writing.
+        Opus for complex business logic, multi-service changes, architectural decisions.
+      options:
+        - "Sonnet — routine feature / CRUD / bug fix"
+        - "Opus — complex logic / multi-layer / architectural change"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: solution_name
+    attributes:
+      label: Target solution
+      description: Which FirstBank solution does this change apply to?
+      options:
+        - "Specify in description"
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **After saving this issue:**
+        1. Assign a human owner who is accountable for review
+        2. When the spec is solid and all fields above are complete, add the `copilot-ready` label
+        3. Start the official GitHub Copilot cloud agent by assigning the issue to Copilot or using the GitHub Agents panel/page
+        4. Copilot creates a branch and draft PR
+        5. The human owner reviews the PR before merge

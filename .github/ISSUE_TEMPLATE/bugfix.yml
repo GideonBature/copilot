@@ -1,0 +1,80 @@
+name: Bug fix
+description: Something is broken and needs to be fixed. Fill every field — the Copilot agent reads this literally.
+labels: ["bug", "needs-spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Before adding the `copilot-ready` label**, ensure the bug is fully reproduced
+        > and the expected behaviour is precisely described. The Copilot coding agent
+        > cannot fix what it cannot understand.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One sentence — what is broken?
+      placeholder: "POST /v1/customers returns 500 when email already exists instead of 409"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps, inputs, and environment needed to see the bug.
+      placeholder: |
+        1. POST /v1/customers with body { "email": "existing@bank.com", ... }
+        2. Observe 500 Internal Server Error response
+        3. Expected: 409 Conflict with validation message
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behaviour
+    attributes:
+      label: Current (broken) behaviour
+      description: What is actually happening?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      label: Expected (correct) behaviour
+      description: What should happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: How do we know the bug is fixed?
+      placeholder: |
+        - [ ] POST /v1/customers with a duplicate email returns 409 with message "Email already in use"
+        - [ ] SP_CREATE_CUSTOMER raises a named Oracle exception for duplicate email
+        - [ ] Unit test added: Handle_DuplicateEmail_Returns409Conflict
+        - [ ] No regression on the happy path (new unique email still returns 201)
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope — do NOT change these
+      placeholder: |
+        - Do not change any other endpoint
+        - Do not modify the customer table schema
+    validations:
+      required: true
+
+  - type: dropdown
+    id: model
+    attributes:
+      label: Suggested model
+      options:
+        - "Sonnet — straightforward fix"
+        - "Opus — complex root cause / multi-layer investigation"
+    validations:
+      required: true

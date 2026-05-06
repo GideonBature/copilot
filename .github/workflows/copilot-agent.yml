@@ -1,0 +1,32 @@
+name: Copilot issue readiness
+
+on:
+  issues:
+    types: [labeled, edited, reopened]
+
+jobs:
+  validate-copilot-ready-issue:
+    name: Validate copilot-ready issue
+    if: contains(github.event.issue.labels.*.name, 'copilot-ready')
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: read
+
+    steps:
+      - name: Confirm official Copilot trigger path
+        run: |
+          echo "This workflow does not invoke GitHub Copilot."
+          echo "Use the official Copilot cloud agent trigger instead:"
+          echo "1. Add the copilot-ready label after the issue is fully scoped."
+          echo "2. Assign the issue to Copilot, or start Copilot from the GitHub Agents panel/page."
+          echo "3. Copilot will create a branch and draft pull request for human review."
+
+      - name: Validate issue body exists
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          if [ -z "$ISSUE_BODY" ]; then
+            echo "Issue body is empty. Complete the issue template before adding copilot-ready."
+            exit 1
+          fi

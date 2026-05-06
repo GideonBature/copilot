@@ -1,0 +1,70 @@
+name: CI — Build and test
+
+on:
+  push:
+    branches: [develop, master, "feature/**", "bugfix/**", "hotfix/**", "release/**"]
+  pull_request:
+    branches: [develop, master]
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Discover .NET target
+        id: dotnet
+        shell: bash
+        run: |
+          mapfile -t solutions < <(find . -name '*.sln' -not -path './.git/*' | sort)
+          mapfile -t projects < <(find . -name '*.csproj' -not -path './.git/*' | sort)
+          mapfile -t test_projects < <(find . \( -name '*Test*.csproj' -o -name '*Tests*.csproj' \) -not -path './.git/*' | sort)
+
+          if [ "${#solutions[@]}" -gt 0 ]; then
+            echo "has_dotnet=true" >> "$GITHUB_OUTPUT"
+            echo "target=${solutions[0]}" >> "$GITHUB_OUTPUT"
+            echo "run_tests=true" >> "$GITHUB_OUTPUT"
+          elif [ "${#projects[@]}" -gt 0 ]; then
+            echo "has_dotnet=true" >> "$GITHUB_OUTPUT"
+            echo "target=${projects[0]}" >> "$GITHUB_OUTPUT"
+            if [ "${#test_projects[@]}" -gt 0 ]; then
+              echo "run_tests=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "run_tests=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "has_dotnet=false" >> "$GITHUB_OUTPUT"
+            echo "run_tests=false" >> "$GITHUB_OUTPUT"
+            echo "No .sln or .csproj files found. Skipping .NET build because this repository only contains GitHub/Copilot setup files."
+          fi
+
+      - name: Set up .NET 8
+        if: steps.dotnet.outputs.has_dotnet == 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore NuGet packages
+        if: steps.dotnet.outputs.has_dotnet == 'true'
+        run: dotnet restore "${{ steps.dotnet.outputs.target }}"
+
+      - name: Build solution
+        if: steps.dotnet.outputs.has_dotnet == 'true'
+        run: dotnet build "${{ steps.dotnet.outputs.target }}" --no-restore --configuration Release
+
+      - name: Run unit and integration tests
+        if: steps.dotnet.outputs.has_dotnet == 'true' && steps.dotnet.outputs.run_tests == 'true'
+        run: dotnet test "${{ steps.dotnet.outputs.target }}" --no-build --configuration Release --verbosity normal
+
+      - name: Enforce architecture rules
+        if: steps.dotnet.outputs.has_dotnet == 'true' && steps.dotnet.outputs.run_tests == 'true'
+        # Architecture tests are in their own project and run as part of dotnet test above.
+        # This step is a named reminder that architecture enforcement is mandatory.
+        run: echo "Architecture tests ran as part of dotnet test — see results above."
+
+      - name: Skip .NET validation
+        if: steps.dotnet.outputs.has_dotnet != 'true'
+        run: echo "No .NET solution or project found; CI setup validation completed."
